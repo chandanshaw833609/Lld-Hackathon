@@ -1,7 +1,10 @@
 package UserModule;
 
+import BookSearch.Book;
 import cart.Cart;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class User {
@@ -11,11 +14,13 @@ public class User {
     private String password;
     private String email;
     private Cart cart;
+    private List<PurchaseHistory> history;
 
     public User(String name, Role role) {
         this.id =  UUID.randomUUID().toString();
         this.name = name;
         this.role = role;
+        this.history = new ArrayList<>();
     }
 
     public User() {
@@ -64,5 +69,17 @@ public class User {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<PurchaseHistory> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<PurchaseHistory> history) {
+        this.history = history;
     }
 }

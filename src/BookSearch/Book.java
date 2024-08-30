@@ -12,11 +12,14 @@ public class Book {
     private final String name;
     private final BookCategory bookCategory;
 
-    public Book (String name, String author, BookCategory bookCategory) {
+    private double price;
+
+    public Book (String name, String author, BookCategory bookCategory,double price) {
         this.bookId = UUID.randomUUID().toString();
         this.author = author;
         this.name = name;
         this.bookCategory = bookCategory;
+        this.price=price;
     }
 
     public String getBookId() {
@@ -33,6 +36,14 @@ public class Book {
 
     public BookCategory getBookCategory() {
         return bookCategory;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price)
+    {
+        this.price = price;
     }
 
 

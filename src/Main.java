@@ -36,6 +36,8 @@ public class Main {
             if(loggedInUser!=null)
             {
                 System.out.println("For viewing the cart  -> 7");
+                System.out.println("For Purchase books  -> 8");
+
             }
             String input = scanner.nextLine();
 
@@ -54,6 +56,7 @@ public class Main {
                 case "5" -> libraryManagementSystem.processAddBookRequest();
                 case "6" -> libraryManagementSystem.processBookBrowseRequest();
                 case "7" -> libraryManagementSystem.processViewCartRequest(loggedInUser);
+                case "8" -> libraryManagementSystem.processPaymentRequest(loggedInUser);
                 case "logout" -> loggedInUser = null;
                 case "9" -> loop = false;
                 default -> System.out.println("Enter valid input");

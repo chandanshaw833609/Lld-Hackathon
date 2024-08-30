@@ -41,6 +41,11 @@ public class BookManager {
         System.out.print("Enter author name : ");
         String author = scanner.nextLine();
 
+        System.out.print("Enter price for the book : ");
+        double price = scanner.nextDouble();
+
+        scanner.nextLine();
+
         List<BookCategory> bookCategories = bookCategoryManager.getAllCategory();
         bookCategories.forEach(bookCategory -> System.out.println(bookCategory.getName()));
 
@@ -55,7 +60,7 @@ public class BookManager {
             return;
         }
 
-        Book book = new Book(bookName, author, bookCategoryManager.getCategoryByName(category));
+        Book book = new Book(bookName, author, bookCategoryManager.getCategoryByName(category),price);
         booksMap.put(book.getBookId(), book);
         System.out.println("Book added successfully");
         System.out.println();

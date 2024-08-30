@@ -6,10 +6,12 @@ import BookSearch.BookSearchProcessor;
 import PaymentModule.PaymentProcessor;
 import PaymentModule.PaymentProcessor;
 import UserModule.LoginProcessor;
+import UserModule.PurchaseHistory;
 import UserModule.SignUpProcessor;
 import UserModule.User;
 import cart.CartProcessor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryManagementSystem {
@@ -81,8 +83,24 @@ public class LibraryManagementSystem {
         this.cartProcessor.viewCart(user);
     }
 
-    public void processPaymentRequest(double amount) {
-        paymentProcessor.setPaymentStrategy();
-        paymentProcessor.processPayment(amount);
+    public void processPaymentRequest(User user) {
+        if(user.getCart().getBooks().size()!=0)
+        {
+            paymentProcessor.setPaymentStrategy();
+            paymentProcessor.processPayment(user.getCart().getTotalCartAmount());
+            System.out.println("Payment successfull YAYYY!!!");
+
+            PurchaseHistory purchaseHistory = new PurchaseHistory();
+            purchaseHistory.setBooks(user.getCart().getBooks());
+            user.getHistory().add(purchaseHistory);
+
+            user.getCart().setTotalCartAmount(0);
+            user.getCart().setBooks(new ArrayList<>());
+        }
+        else
+        {
+            System.out.println("Cart is empty , Hence not proceeding with payment");
+        }
+
     }
 }
