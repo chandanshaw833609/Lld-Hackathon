@@ -7,12 +7,11 @@ public class BookSearchProcessor {
     private BookSearchingStrategy bookSearchingStrategy;
     private final Scanner scanner = new Scanner(System.in);
 
-    public void processSearchBookRequest() {
+    public List<Book> processSearchBookRequest() {
         System.out.print("Enter your search input : ");
         String searchInput = scanner.nextLine();
         List<Book> bookList = bookSearchingStrategy.searchBook(searchInput);
-        bookList.forEach(book -> System.out.println(book.toString()));
-        System.out.println();
+        return bookList;
     }
 
     public void setBookSearchingStrategy() {

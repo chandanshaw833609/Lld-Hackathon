@@ -1,25 +1,20 @@
 package UserModule;
 
-import cart.Cart;
-
 import java.util.UUID;
 
-public class User {
-    private String id;
-    private String name;
-    private Role role;
-    private String password;
-    private String email;
-    private Cart cart;
+public class UserMetaData {
+    String name;
+    Role role;
+    String password;
+    String email;
 
-    public User(String name, Role role) {
-        this.id =  UUID.randomUUID().toString();
+    public UserMetaData(String name, Role role) {
         this.name = name;
         this.role = role;
     }
 
-    public User() {
-        this.cart = new Cart();
+    public UserMetaData() {
+
     }
 
     public String getEmail() {
@@ -28,10 +23,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public void setName(String name) {
@@ -56,13 +47,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
     }
 }

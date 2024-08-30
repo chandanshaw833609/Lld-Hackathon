@@ -3,5 +3,5 @@ package BookSearch;
 import java.util.List;
 
 public interface BookSearchingStrategy {
-    List<Book> searchBook(String searchField);
+    List<Book> searchBook(String searchOptions);
 }

@@ -9,9 +9,7 @@ import java.util.UUID;
 public class Book {
     private final String bookId;
     private final String author;
-
     private final String name;
-
     private final BookCategory bookCategory;
 
     public Book (String name, String author, BookCategory bookCategory) {

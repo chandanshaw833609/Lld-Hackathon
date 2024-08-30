@@ -6,12 +6,12 @@ import java.util.Optional;
 
 public class UserManager {
     Map<String, User> users;
-    public static UserManager userManager;
+    private static UserManager userManager;
     private UserManager() {
         users = new HashMap<>();
     }
 
-    public static UserManager getUserManager() {
+    public static UserManager getUserManagerInstance() {
         if (userManager == null) {
             userManager = new UserManager();
         }

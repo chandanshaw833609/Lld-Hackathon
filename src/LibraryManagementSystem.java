@@ -1,10 +1,10 @@
-import BookSearch.BookBrowseProcessor;
-import BookSearch.BookCategoryManager;
-import BookSearch.BookManager;
-import BookSearch.BookSearchProcessor;
+import BookSearch.*;
 import UserModule.LoginProcessor;
-import UserModule.Role;
 import UserModule.SignUpProcessor;
+import UserModule.User;
+import cart.CartProcessor;
+
+import java.util.List;
 
 public class LibraryManagementSystem {
     private static LibraryManagementSystem libraryManagementSystem;
@@ -14,6 +14,7 @@ public class LibraryManagementSystem {
     private final LoginProcessor loginProcessor;
     private final SignUpProcessor signUpProcessor;
     private final BookBrowseProcessor bookBrowseProcessor;
+    private final CartProcessor cartProcessor;
 
     private LibraryManagementSystem() {
         bookCategoryManager = BookCategoryManager.getBookCategoryMgr();
@@ -22,6 +23,7 @@ public class LibraryManagementSystem {
         loginProcessor = new LoginProcessor();
         signUpProcessor = new SignUpProcessor();
         bookBrowseProcessor = new BookBrowseProcessor();
+        cartProcessor = new CartProcessor();
     }
 
     public static LibraryManagementSystem getInstance() {
@@ -32,12 +34,13 @@ public class LibraryManagementSystem {
     }
 
 
-    public Role processLoginRequest() {
+    public User processLoginRequest() {
         loginProcessor.setLoginStrategy();
         return loginProcessor.processLogin();
     }
 
-    public Role processSignUpRequest() {
+    public User processSignUpRequest() {
+        signUpProcessor.setSignupStrategy();
         return signUpProcessor.processSignUp();
     }
 
@@ -49,12 +52,23 @@ public class LibraryManagementSystem {
         bookManager.addBook();
     }
 
-    public void processBookSearchRequest() {
+    public List<Book> processBookSearchRequest() {
         bookSearchProcessor.setBookSearchingStrategy();
-        bookSearchProcessor.processSearchBookRequest();
+        List<Book> booksSearched = bookSearchProcessor.processSearchBookRequest();
+        return booksSearched;
     }
 
     public void processAddCategoryRequest() {
         bookCategoryManager.addBookCategory();
+    }
+
+    public void processAddToCartRequest(User user)
+    {
+        this.cartProcessor.addBooksToCart(user);
+    }
+
+    public void processViewCartRequest(User user)
+    {
+        this.cartProcessor.viewCart(user);
     }
 }

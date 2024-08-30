@@ -4,7 +4,7 @@ import java.util.List;
 
 public class BookSearchByAuthor implements BookSearchingStrategy{
     @Override
-    public List<Book> searchBook(String searchInput) {
+    public List<Book> searchBook(String searchOptions) {
         BookManager bookManager = BookManager.getBookMgr();
         List<Book> allBooks = bookManager.getAllBook();
         return allBooks
@@ -12,7 +12,7 @@ public class BookSearchByAuthor implements BookSearchingStrategy{
                 .filter(book1 -> book1
                         .getAuthor()
                         .toLowerCase()
-                        .contains(searchInput.toLowerCase()))
+                        .contains(searchOptions.toLowerCase()))
                 .toList();
     }
 }

@@ -29,6 +29,11 @@ public class BookManager {
         throw new RuntimeException("This book does not exist");
     }
 
+    public Book getBookByName(String bookName) {
+       Optional<Book> optionalBook = booksMap.values().stream().filter(book -> book.getName().equalsIgnoreCase(bookName)).findFirst();
+        return optionalBook.orElse(null);
+    }
+
     public void addBook() {
         System.out.print("Enter book name : ");
         String bookName = scanner.nextLine();
