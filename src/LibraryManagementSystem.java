@@ -89,6 +89,7 @@ public class LibraryManagementSystem {
             paymentProcessor.setPaymentStrategy();
             paymentProcessor.processPayment(user.getCart().getTotalCartAmount());
             System.out.println("Payment successfull YAYYY!!!");
+
             PurchaseHistory purchaseHistory = new PurchaseHistory();
             purchaseHistory.setBooks(user.getCart().getBooks());
             user.getHistory().add(purchaseHistory);
