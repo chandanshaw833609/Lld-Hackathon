@@ -23,6 +23,9 @@ public class CartProcessor {
         String bookName = scanner.nextLine();
         Book book = bookManager.getBookByName(bookName);
         user.getCart().getBooks().add(book);
+        double amount = user.getCart().getTotalCartAmount()+book.getPrice();
+        user.getCart().setTotalCartAmount(amount);
+
         if(user.getCart().getBooks().isEmpty())
         {
             System.out.println("Cart is empty");
