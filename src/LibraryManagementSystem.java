@@ -1,4 +1,10 @@
 import BookSearch.*;
+import BookSearch.BookBrowseProcessor;
+import BookSearch.BookCategoryManager;
+import BookSearch.BookManager;
+import BookSearch.BookSearchProcessor;
+import PaymentModule.PaymentProcessor;
+import PaymentModule.PaymentProcessor;
 import UserModule.LoginProcessor;
 import UserModule.SignUpProcessor;
 import UserModule.User;
@@ -16,6 +22,8 @@ public class LibraryManagementSystem {
     private final BookBrowseProcessor bookBrowseProcessor;
     private final CartProcessor cartProcessor;
 
+    private final PaymentProcessor paymentProcessor;
+
     private LibraryManagementSystem() {
         bookCategoryManager = BookCategoryManager.getBookCategoryMgr();
         bookManager = BookManager.getBookMgr();
@@ -24,6 +32,7 @@ public class LibraryManagementSystem {
         signUpProcessor = new SignUpProcessor();
         bookBrowseProcessor = new BookBrowseProcessor();
         cartProcessor = new CartProcessor();
+        paymentProcessor = new PaymentProcessor();
     }
 
     public static LibraryManagementSystem getInstance() {
@@ -70,5 +79,10 @@ public class LibraryManagementSystem {
     public void processViewCartRequest(User user)
     {
         this.cartProcessor.viewCart(user);
+    }
+
+    public void processPaymentRequest(double amount) {
+        paymentProcessor.setPaymentStrategy();
+        paymentProcessor.processPayment(amount);
     }
 }
