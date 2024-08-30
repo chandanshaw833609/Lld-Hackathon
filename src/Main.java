@@ -1,7 +1,7 @@
 import BookSearch.BookBrowseProcessor;
-import BookSearch.BookCategoryMgr;
-import BookSearch.BookMgr;
-import BookSearch.SearchBookProcessor;
+import BookSearch.BookCategoryManager;
+import BookSearch.BookManager;
+import BookSearch.BookSearchProcessor;
 import UserModule.LoginProcessor;
 import UserModule.Role;
 import UserModule.SignUpProcessor;
@@ -13,12 +13,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        BookCategoryMgr bookCategoryMgr = BookCategoryMgr.getBookCategoryMgr();
-        BookMgr bookMgr = BookMgr.getBookMgr();
-        SearchBookProcessor searchBookProcessor = SearchBookProcessor.getSearchBookProcessor();
-        LoginProcessor loginProcessor = new LoginProcessor();
-        SignUpProcessor signUpProcessor = new SignUpProcessor();
-        BookBrowseProcessor bookBrowseProcessor = new BookBrowseProcessor();
+        LibraryManagementSystem libraryManagementSystem = LibraryManagementSystem.getInstance();
 
         Role loggedInRole = null;
         boolean loop = true;
@@ -45,15 +40,12 @@ public class Main {
             String input = scanner.nextLine();
 
             switch (input) {
-                case "1" -> {
-                    loginProcessor.setLoginStrategy();
-                    loggedInRole = loginProcessor.processLogin();
-                }
-                case "2" -> loggedInRole = signUpProcessor.processSignUp();
-                case "3" -> searchBookProcessor.processSearchBook();
-                case "4" -> bookCategoryMgr.addBookCategory();
-                case "5" -> bookMgr.addBook();
-                case "6" -> bookBrowseProcessor.browseBooks();
+                case "1" -> loggedInRole = libraryManagementSystem.processLoginRequest();
+                case "2" -> loggedInRole = libraryManagementSystem.processSignUpRequest();
+                case "3" -> libraryManagementSystem.processBookSearchRequest();
+                case "4" -> libraryManagementSystem.processAddCategoryRequest();
+                case "5" -> libraryManagementSystem.processAddBookRequest();
+                case "6" -> libraryManagementSystem.processBookBrowseRequest();
                 case "logout" -> loggedInRole = null;
                 case "9" -> loop = false;
                 default -> System.out.println("Enter valid input");

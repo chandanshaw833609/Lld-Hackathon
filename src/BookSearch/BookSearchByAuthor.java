@@ -5,8 +5,8 @@ import java.util.List;
 public class BookSearchByAuthor implements BookSearchingStrategy{
     @Override
     public List<Book> searchBook(String searchInput) {
-        BookMgr bookMgr = BookMgr.getBookMgr();
-        List<Book> allBooks = bookMgr.getAllBook();
+        BookManager bookManager = BookManager.getBookMgr();
+        List<Book> allBooks = bookManager.getAllBook();
         return allBooks
                 .stream()
                 .filter(book1 -> book1

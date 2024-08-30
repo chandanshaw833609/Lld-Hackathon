@@ -2,22 +2,22 @@ package BookSearch;
 
 import java.util.*;
 
-public class BookCategoryMgr {
+public class BookCategoryManager {
 
-    private static BookCategoryMgr bookCategoryMgrInstance;
+    private static BookCategoryManager bookCategoryManagerInstance;
     private final Map<String, BookCategory> bookCategoryMap;
 
     private final Scanner scanner;
-    private BookCategoryMgr() {
+    private BookCategoryManager() {
         bookCategoryMap = new HashMap<>();
         scanner = new Scanner(System.in);
     }
 
-    public static BookCategoryMgr getBookCategoryMgr() {
-        if (bookCategoryMgrInstance == null) {
-            bookCategoryMgrInstance = new BookCategoryMgr();
+    public static BookCategoryManager getBookCategoryMgr() {
+        if (bookCategoryManagerInstance == null) {
+            bookCategoryManagerInstance = new BookCategoryManager();
         }
-        return bookCategoryMgrInstance;
+        return bookCategoryManagerInstance;
     }
 
     public BookCategory getBookCategory(String bookCategoryId) {

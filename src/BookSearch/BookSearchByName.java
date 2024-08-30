@@ -1,14 +1,13 @@
 package BookSearch;
 
 import java.util.List;
-import java.util.Optional;
 
 public class BookSearchByName implements BookSearchingStrategy{
 
     @Override
     public List<Book> searchBook(String searchInput) {
-        BookMgr bookMgr = BookMgr.getBookMgr();
-        List<Book> allBooks = bookMgr.getAllBook();
+        BookManager bookManager = BookManager.getBookMgr();
+        List<Book> allBooks = bookManager.getAllBook();
         return allBooks
                 .stream()
                 .filter(book -> book
