@@ -11,8 +11,7 @@ public class BookSearchProcessor {
     public List<Book> processSearchBookRequest() {
         System.out.print("Enter your search input : ");
         String searchInput = scanner.nextLine();
-        List<Book> bookList = bookSearchingStrategy.searchBook(searchInput);
-        return bookList;
+        return bookSearchingStrategy.searchBook(searchInput);
     }
 
     public void setBookSearchingStrategy() {
@@ -26,8 +25,10 @@ public class BookSearchProcessor {
             case 1 -> bookSearchingStrategy = new BookSearchByName();
             case 2 -> bookSearchingStrategy = new BookSearchByAuthor();
             case 3 -> bookSearchingStrategy = new BookSearchByCategory();
-            default -> System.out.println("Enter a valid input");
+            default -> {
+                System.out.println("Enter a valid option...\n");
+                setBookSearchingStrategy();
+            }
         }
-        System.out.println();
     }
 }

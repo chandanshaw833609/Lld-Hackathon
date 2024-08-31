@@ -1,38 +1,55 @@
 package UserModule;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class UserManager {
-    Map<String, User> users;
     private static UserManager userManager;
-    private UserManager() {
-        users = new HashMap<>();
-    }
+    private final Map<String, User> usersMap = new HashMap<>();
 
-    public static UserManager getUserManagerInstance() {
+    private UserManager() {}
+
+    public static UserManager getInstance() {
         if (userManager == null) {
             userManager = new UserManager();
         }
         return userManager;
     }
 
-    public void addUser(User user) {
-        users.put(user.getId(), user);
+    public User getUserById(String userId) {
+        return usersMap.get(userId);
     }
 
-    public User getUserById(String id) {
-        return users.get(id);
+    public void saveUser(User user) {
+        usersMap.put(user.getId(), user);
     }
 
     public User getUserByName(String name) {
-       Optional<User> optionalUser =  users.values().stream().filter(user -> user.getName().equalsIgnoreCase(name)).findFirst();
-       return optionalUser.orElse(null);
+        Optional<User> optionalUser = usersMap
+                .values()
+                .stream()
+                .filter(user -> user
+                        .getName()
+                        .equalsIgnoreCase(name))
+                .findFirst();
+        return optionalUser.orElse(null);
     }
 
     public User getUserByEmail(String email) {
-        Optional<User> optionalUser =  users.values().stream().filter(user -> user.getName().equalsIgnoreCase(email)).findFirst();
+        Optional<User> optionalUser =  usersMap
+                .values()
+                .stream()
+                .filter(user -> user
+                        .getEmail()
+                        .equalsIgnoreCase(email))
+                .findFirst();
         return optionalUser.orElse(null);
+    }
+
+    public List<User> getAllUser() {
+        return new ArrayList<>(usersMap.values());
+    }
+
+    public void removeUser(String userId) {
+        usersMap.remove(userId);
     }
 }

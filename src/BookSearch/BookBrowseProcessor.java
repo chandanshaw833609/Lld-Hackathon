@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class BookBrowseProcessor {
     public void browseBooks() {
-        BookCategoryManager bookCategoryManager = BookCategoryManager.getBookCategoryMgr();
+        BookCategoryManager bookCategoryManager = BookCategoryManager.getInstance();
         List<BookCategory> categoryList = bookCategoryManager.getAllCategory();
         if (categoryList.size() == 0) {
             System.out.println("There are no book available currently...");

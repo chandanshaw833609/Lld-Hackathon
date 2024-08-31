@@ -1,5 +1,7 @@
-package UserModule;
+package login;
 
+import UserModule.User;
+import UserModule.UserMetaData;
 import login.EmailLoginStrategy;
 import login.LoginStrategy;
 import login.PasswordLoginStrategy;
@@ -8,14 +10,14 @@ import java.util.Scanner;
 
 public class LoginProcessor {
     LoginStrategy loginStrategy;
-    Scanner scanner;
+
 
     public LoginProcessor() {
-        scanner = new Scanner(System.in);
         this.loginStrategy = null;
     }
 
     public void setLoginStrategy() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("choose login in method : ");
         System.out.println("For username and password way of login enter -> 1");
         System.out.println("For email way of login enter -> 2");
@@ -23,15 +25,19 @@ public class LoginProcessor {
         switch (input) {
             case "1" -> loginStrategy = new PasswordLoginStrategy();
             case "2" -> loginStrategy = new EmailLoginStrategy();
+            default -> {
+                System.out.println("Choose a valid option...\n");
+                setLoginStrategy();
+            }
         }
     }
 
     public User processLogin() {
-        System.out.println("Enter your name ->");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter name ->");
         String name = scanner.nextLine();
         UserMetaData userMetaData = new UserMetaData();
         userMetaData.setName(name);
-
 
         if (loginStrategy instanceof EmailLoginStrategy) {
             System.out.println("Enter your email ->");
@@ -40,17 +46,18 @@ public class LoginProcessor {
         } else {
             System.out.println("Enter your password -> ");
             String password = scanner.nextLine();
+            userMetaData.setName(name);
             userMetaData.setPassword(password);
         }
 
         User isAuthenticatedUser = loginStrategy.processLogin(userMetaData);
 
         if (isAuthenticatedUser != null) {
-            System.out.println("Login successful");
+            System.out.println(isAuthenticatedUser.getName() + " has logged in successfully...\n");
         } else {
-            System.out.println("Failed to processSignup");
+            System.out.println("Bad credential!!!");
+            System.out.println("Failed to process login...\n");
         }
-        System.out.println();
         return isAuthenticatedUser;
     }
 }

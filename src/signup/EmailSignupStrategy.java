@@ -1,20 +1,19 @@
 package signup;
 
-import UserModule.User;
-import UserModule.UserManager;
-import UserModule.UserMetaData;
+import UserModule.*;
 
 public class EmailSignupStrategy implements SignupStrategy {
     UserManager userManager;
     public EmailSignupStrategy()
     {
-        this.userManager = UserManager.getUserManagerInstance();
+        this.userManager = UserManager.getInstance();
     }
     @Override
     public User processSignup(UserMetaData userMetaData) {
-        User user = new User(userMetaData.getName(),userMetaData.getRole());
-        user.setEmail(user.getEmail());
-        userManager.addUser(user);
+        User user = new Buyer();
+        user.setName(userMetaData.getName());
+        user.setEmail(userMetaData.getEmail());
+        userManager.saveUser(user);
         return user;
     }
 }
