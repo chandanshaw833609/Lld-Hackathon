@@ -2,15 +2,15 @@ package UserModule;
 
 import BookSearch.Book;
 
-import java.util.List;
-
 public class Sale {
     private final Book book;
     private int totalPurchase;
-    private double totalAmount;
+    private double totalProfit;
 
     public Sale(Book book) {
         this.book = book;
+        this.totalProfit = book.getPrice();
+        this.totalPurchase = 1;
     }
 
     public Book getBook() {
@@ -25,20 +25,20 @@ public class Sale {
         this.totalPurchase = totalPurchase;
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public double getTotalProfit() {
+        return totalProfit;
     }
 
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setTotalProfit(double totalProfit) {
+        this.totalProfit = totalProfit;
     }
 
     @Override
     public String toString() {
         return "Sale {" +
-                "book =" + book.getName() +
-                ", totalPurchase=" + totalPurchase +
-                ", totalAmount=" + totalAmount +
+                "book = " + book.getName() +
+                ", totalPurchase = " + totalPurchase +
+                ", totalProfit = Rs." + totalProfit +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package login;
 
 import UserModule.User;
+import UserModule.BuyerManager;
 import UserModule.UserManager;
 import UserModule.UserMetaData;
 
@@ -10,16 +11,12 @@ public class PasswordLoginStrategy implements LoginStrategy {
 
     public PasswordLoginStrategy()
     {
-        this.userManager = UserManager.getUserManagerInstance();
+        this.userManager = UserManager.getInstance();
     }
 
     @Override
     public User processLogin(UserMetaData userMetaData) {
         User user = userManager.getUserByName(userMetaData.getName());
-        if(user!=null && user.getEmail()!=null)
-        {
-            return user;
-        }
-        return userMetaData.getPassword().equals(user.getPassword()) ? user : null;
+        return user != null && user.getPassword().equals(userMetaData.getPassword()) ? user : null;
     }
 }

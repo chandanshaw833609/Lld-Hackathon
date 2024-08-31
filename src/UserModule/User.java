@@ -8,24 +8,24 @@ import java.util.List;
 import java.util.UUID;
 
 public class User {
-    private String id;
+    private final String id = UUID.randomUUID().toString();
     private String name;
-    private Role role;
+    private String username;
+    private final Role role;
     private String password;
     private String email;
-    private Cart cart;
-    private List<PurchaseHistory> history;
 
-    public User(String name, Role role) {
-        this.id =  UUID.randomUUID().toString();
-        this.name = name;
+    public User(Role role) {
         this.role = role;
-
     }
 
-    public User() {
-        this.cart = new Cart();
-        this.history = new ArrayList<>();
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -52,9 +52,6 @@ public class User {
         return role;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     public String getPassword() {
         return password;
@@ -64,23 +61,4 @@ public class User {
         this.password = password;
     }
 
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public List<PurchaseHistory> getHistory() {
-        return history;
-    }
-
-    public void setHistory(List<PurchaseHistory> history) {
-        this.history = history;
-    }
 }

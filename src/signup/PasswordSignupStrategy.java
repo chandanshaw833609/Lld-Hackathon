@@ -1,8 +1,6 @@
 package signup;
 
-import UserModule.User;
-import UserModule.UserManager;
-import UserModule.UserMetaData;
+import UserModule.*;
 
 public class PasswordSignupStrategy implements SignupStrategy {
 
@@ -10,14 +8,15 @@ public class PasswordSignupStrategy implements SignupStrategy {
 
     public PasswordSignupStrategy()
     {
-        this.userManager = UserManager.getUserManagerInstance();
+        this.userManager = UserManager.getInstance();
     }
 
     @Override
     public User processSignup(UserMetaData userMetaData) {
-        User user = new User(userMetaData.getName(),userMetaData.getRole());
+        User user = new Buyer();
+        user.setName(userMetaData.getName());
         user.setPassword(userMetaData.getPassword());
-        userManager.addUser(user);
+        userManager.saveUser(user);
         return user;
     }
 }

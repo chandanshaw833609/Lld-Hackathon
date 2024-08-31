@@ -3,6 +3,6 @@ package PaymentModule;
 public class PaytmUpiPayment extends UpiPayment{
     @Override
     public void processUpiPayment(double amount) {
-        System.out.println("Payment from PAYTM upi payment of "+amount + "is successfull!!");
+        System.out.println("Payment from PAYTM upi of Rs."+amount + " is successful...\n");
     }
 }

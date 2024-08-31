@@ -13,7 +13,7 @@ public class BookCategoryManager {
         scanner = new Scanner(System.in);
     }
 
-    public static BookCategoryManager getBookCategoryMgr() {
+    public static BookCategoryManager getInstance() {
         if (bookCategoryManagerInstance == null) {
             bookCategoryManagerInstance = new BookCategoryManager();
         }
@@ -24,13 +24,9 @@ public class BookCategoryManager {
         return bookCategoryMap.get(bookCategoryId);
     }
 
-    public void addBookCategory() {
-        System.out.print("Enter Book Category Name : ");
-        String categoryName = scanner.nextLine();
-        BookCategory bookCategory = new BookCategory(categoryName);
+    public void addBookCategory(BookCategory bookCategory) {
         bookCategoryMap.put(bookCategory.getBookCategoryId(), bookCategory);
-        System.out.println("Category added successfully");
-        System.out.println();
+        System.out.println("Category added successfully\n");
     }
 
     public List<BookCategory> getAllCategory() {

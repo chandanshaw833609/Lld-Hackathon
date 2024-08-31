@@ -6,7 +6,7 @@ public class BookSearchByName implements BookSearchingStrategy{
 
     @Override
     public List<Book> searchBook(String searchOptions) {
-        BookManager bookManager = BookManager.getBookMgr();
+        BookManager bookManager = BookManager.getInstance();
         List<Book> allBooks = bookManager.getAllBook();
         return allBooks
                 .stream()

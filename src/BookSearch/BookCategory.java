@@ -7,7 +7,7 @@ public class BookCategory {
 
     private final String name;
 
-    BookCategory(String name) {
+    public BookCategory(String name) {
         bookCategoryId = UUID.randomUUID().toString();
         this.name = name;
     }

@@ -15,4 +15,11 @@ public class PurchaseHistory {
     public void setBooks(List<Book> books) {
         this.books = books;
     }
+
+    @Override
+    public String toString() {
+        return "PurchaseHistory {" +
+                "books=" + books +
+                '}';
+    }
 }

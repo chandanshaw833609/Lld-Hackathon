@@ -1,8 +1,6 @@
 package login;
 
-import UserModule.User;
-import UserModule.UserManager;
-import UserModule.UserMetaData;
+import UserModule.*;
 
 public class EmailLoginStrategy implements LoginStrategy {
 
@@ -10,7 +8,7 @@ public class EmailLoginStrategy implements LoginStrategy {
 
     public EmailLoginStrategy()
     {
-        this.userManager = UserManager.getUserManagerInstance();
+        this.userManager = UserManager.getInstance();
     }
 
     @Override

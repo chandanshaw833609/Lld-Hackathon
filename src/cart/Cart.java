@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Cart {
     private int id;
-    private List<Book> books = new ArrayList<>();
+    private final List<Book> books = new ArrayList<>();
 
     private double totalCartAmount;
 
@@ -35,5 +35,13 @@ public class Cart {
 
     public void setTotalCartAmount(double totalCartAmount) {
         this.totalCartAmount = totalCartAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart {" +
+                "books=" + books +
+                ", totalCartAmount=" + totalCartAmount +
+                '}';
     }
 }

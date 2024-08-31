@@ -14,12 +14,23 @@ public class Book {
 
     private double price;
 
-    public Book (String name, String author, BookCategory bookCategory,double price) {
+    private String sellerId;
+
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public Book (String name, String author, BookCategory bookCategory, double price, String sellerId) {
         this.bookId = UUID.randomUUID().toString();
         this.author = author;
         this.name = name;
         this.bookCategory = bookCategory;
         this.price=price;
+        this.sellerId = sellerId;
     }
 
     public String getBookId() {
@@ -49,9 +60,11 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "Book {" +
                 "author='" + author + '\'' +
                 ", name='" + name + '\'' +
+                ", bookCategory=" + bookCategory.getName() +
+                ", price=" + price +
                 '}';
     }
 }
