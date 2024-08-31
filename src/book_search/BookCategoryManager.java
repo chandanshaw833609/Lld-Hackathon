@@ -1,4 +1,6 @@
-package BookSearch;
+package book_search;
+
+import book.BookCategory;
 
 import java.util.*;
 

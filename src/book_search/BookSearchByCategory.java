@@ -1,4 +1,7 @@
-package BookSearch;
+package book_search;
+
+import book.Book;
+import book.BookManager;
 
 import java.util.List;
 

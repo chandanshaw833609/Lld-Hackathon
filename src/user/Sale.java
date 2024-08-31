@@ -1,6 +1,6 @@
-package UserModule;
+package user;
 
-import BookSearch.Book;
+import book.Book;
 
 public class Sale {
     private final Book book;

@@ -1,7 +1,7 @@
-package UserModule;
+package user;
 
-import BookSearch.BookCategory;
-import BookSearch.BookCategoryManager;
+import book.BookCategory;
+import book_search.BookCategoryManager;
 
 import java.util.List;
 import java.util.Optional;

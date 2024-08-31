@@ -1,11 +1,8 @@
 package signup;
 
-import UserModule.Buyer;
-import UserModule.User;
-import UserModule.UserManager;
-import signup.EmailSignupStrategy;
-import signup.PasswordSignupStrategy;
-import signup.SignupStrategy;
+import user.Buyer;
+import user.User;
+import user.UserManager;
 
 import java.util.Scanner;
 

@@ -1,10 +1,7 @@
 package login;
 
-import UserModule.User;
-import UserModule.UserMetaData;
-import login.EmailLoginStrategy;
-import login.LoginStrategy;
-import login.PasswordLoginStrategy;
+import user.User;
+import user.UserMetaData;
 
 import java.util.Scanner;
 

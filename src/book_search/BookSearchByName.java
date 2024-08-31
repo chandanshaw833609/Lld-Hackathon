@@ -1,16 +1,20 @@
-package BookSearch;
+package book_search;
+
+import book.Book;
+import book.BookManager;
 
 import java.util.List;
 
-public class BookSearchByAuthor implements BookSearchingStrategy{
+public class BookSearchByName implements BookSearchingStrategy{
+
     @Override
     public List<Book> searchBook(String searchOptions) {
         BookManager bookManager = BookManager.getInstance();
         List<Book> allBooks = bookManager.getAllBook();
         return allBooks
                 .stream()
-                .filter(book1 -> book1
-                        .getAuthor()
+                .filter(book -> book
+                        .getName()
                         .toLowerCase()
                         .contains(searchOptions.toLowerCase()))
                 .toList();

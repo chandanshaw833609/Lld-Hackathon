@@ -1,10 +1,5 @@
-package UserModule;
+package user;
 
-import BookSearch.Book;
-import cart.Cart;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class User {

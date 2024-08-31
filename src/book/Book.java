@@ -1,9 +1,5 @@
-package BookSearch;
+package book;
 
-import jdk.jfr.Category;
-
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 public class Book {

@@ -1,7 +1,7 @@
 package signup;
 
-import UserModule.User;
-import UserModule.UserMetaData;
+import user.User;
+import user.UserMetaData;
 
 public interface SignupStrategy {
     public User processSignup(UserMetaData userMetaData);

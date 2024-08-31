@@ -1,4 +1,4 @@
-package UserModule;
+package user;
 
 import java.util.*;
 

@@ -1,9 +1,9 @@
-package UserModule;
+package user;
 
-import BookSearch.Book;
-import BookSearch.BookCategory;
-import BookSearch.BookCategoryManager;
-import BookSearch.BookManager;
+import book.Book;
+import book.BookCategory;
+import book_search.BookCategoryManager;
+import book.BookManager;
 
 import java.util.List;
 import java.util.Scanner;

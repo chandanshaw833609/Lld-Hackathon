@@ -1,9 +1,9 @@
 package login;
 
-import UserModule.User;
-import UserModule.BuyerManager;
-import UserModule.UserManager;
-import UserModule.UserMetaData;
+import user.User;
+import user.BuyerManager;
+import user.UserManager;
+import user.UserMetaData;
 
 public class PasswordLoginStrategy implements LoginStrategy {
 

@@ -1,5 +1,7 @@
-package BookSearch;
+package book_search;
 
+
+import book.Book;
 
 import java.util.List;
 import java.util.Scanner;
