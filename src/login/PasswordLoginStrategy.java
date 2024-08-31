@@ -1,7 +1,6 @@
 package login;
 
 import UserModule.User;
-import UserModule.BuyerManager;
 import UserModule.UserManager;
 import UserModule.UserMetaData;
 
