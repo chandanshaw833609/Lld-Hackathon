@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class CartProcessor {
 
-    private BookManager bookManager;
+    private final BookManager bookManager;
 
     public CartProcessor()
     {
@@ -33,20 +33,19 @@ public class CartProcessor {
     }
     public void viewCart(User user)
     {
-        if(user.getCart().getBooks().isEmpty())
+        if (user.getCart().getBooks().size() == 0)
         {
             System.out.println(user.getName() + " Your Cart is empty");
         }
-        if(user.getCart()!=null)
+        else
         {
-            user.getCart().getBooks().stream().forEach((book)-> System.out.println(book.toString()));
+            user.getCart().getBooks().forEach(book-> System.out.println(book.toString()));
         }
     }
     public void deleteBooksFromCart(User user, List<Book> booksToDelete) {
         List<Book> updatedBooks = user.getCart().getBooks().stream()
                 .filter(book -> !booksToDelete.contains(book))
                 .collect(Collectors.toList());
-        // Update the cart with the filtered list of books
         user.getCart().setBooks(updatedBooks);
     }
 }

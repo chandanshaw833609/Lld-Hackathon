@@ -20,11 +20,12 @@ public class User {
         this.id =  UUID.randomUUID().toString();
         this.name = name;
         this.role = role;
-        this.history = new ArrayList<>();
+
     }
 
     public User() {
         this.cart = new Cart();
+        this.history = new ArrayList<>();
     }
 
     public String getEmail() {

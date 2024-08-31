@@ -65,8 +65,7 @@ public class LibraryManagementSystem {
 
     public List<Book> processBookSearchRequest() {
         bookSearchProcessor.setBookSearchingStrategy();
-        List<Book> booksSearched = bookSearchProcessor.processSearchBookRequest();
-        return booksSearched;
+        return  bookSearchProcessor.processSearchBookRequest();
     }
 
     public void processAddCategoryRequest() {
@@ -88,19 +87,23 @@ public class LibraryManagementSystem {
         {
             paymentProcessor.setPaymentStrategy();
             paymentProcessor.processPayment(user.getCart().getTotalCartAmount());
-            System.out.println("Payment successfull YAYYY!!!");
+            System.out.println("Payment successfully Done!!!");
 
             PurchaseHistory purchaseHistory = new PurchaseHistory();
             purchaseHistory.setBooks(user.getCart().getBooks());
             user.getHistory().add(purchaseHistory);
 
             user.getCart().setTotalCartAmount(0);
-            user.getCart().setBooks(new ArrayList<>());
+            user.getCart().getBooks().clear();
         }
         else
         {
             System.out.println("Cart is empty , Hence not proceeding with payment");
         }
+
+    }
+
+    public void processViewPurchaseHistoryRequest(User user) {
 
     }
 }
