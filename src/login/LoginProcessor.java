@@ -1,7 +1,7 @@
 package login;
 
-import user.User;
-import user.UserMetaData;
+import UserModule.User;
+import UserModule.UserMetaData;
 
 import java.util.Scanner;
 
@@ -20,8 +20,8 @@ public class LoginProcessor {
         System.out.println("For email way of login enter -> 2");
         String input = scanner.nextLine();
         switch (input) {
-            case "1" -> loginStrategy = new PasswordLoginStrategy();
-            case "2" -> loginStrategy = new EmailLoginStrategy();
+            case "1" -> loginStrategy = new UsernamePasswordLoginStrategy();
+            case "2" -> loginStrategy = new EmailOtpLoginStrategy();
             default -> {
                 System.out.println("Choose a valid option...\n");
                 setLoginStrategy();
@@ -31,19 +31,18 @@ public class LoginProcessor {
 
     public User processLogin() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter name ->");
-        String name = scanner.nextLine();
         UserMetaData userMetaData = new UserMetaData();
-        userMetaData.setName(name);
 
-        if (loginStrategy instanceof EmailLoginStrategy) {
+        if (loginStrategy instanceof EmailOtpLoginStrategy) {
             System.out.println("Enter your email ->");
             String email = scanner.nextLine();
             userMetaData.setEmail(email);
         } else {
+            System.out.println("Enter your username -> ");
+            String username = scanner.nextLine();
+            userMetaData.setUsername(username);
             System.out.println("Enter your password -> ");
             String password = scanner.nextLine();
-            userMetaData.setName(name);
             userMetaData.setPassword(password);
         }
 

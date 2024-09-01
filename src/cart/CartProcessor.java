@@ -1,9 +1,9 @@
 package cart;
 
-import book.Book;
-import book.BookManager;
-import user.Buyer;
-
+import BookSearch.Book;
+import BookSearch.BookManager;
+import UserModule.Buyer;
+import UserModule.User;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
