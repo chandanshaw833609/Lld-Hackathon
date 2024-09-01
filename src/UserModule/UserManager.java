@@ -23,13 +23,14 @@ public class UserManager {
         usersMap.put(user.getId(), user);
     }
 
-    public User getUserByName(String name) {
+    public User getUserByUsername(String username) {
         Optional<User> optionalUser = usersMap
                 .values()
                 .stream()
+                .filter(user -> user.getUsername() != null)
                 .filter(user -> user
-                        .getName()
-                        .equalsIgnoreCase(name))
+                        .getUsername()
+                        .equals(username))
                 .findFirst();
         return optionalUser.orElse(null);
     }
@@ -38,9 +39,8 @@ public class UserManager {
         Optional<User> optionalUser =  usersMap
                 .values()
                 .stream()
-                .filter(user -> user
-                        .getEmail()
-                        .equalsIgnoreCase(email))
+                .filter(user -> user.getEmail() != null)
+                .filter(user -> user.getEmail().equals(email))
                 .findFirst();
         return optionalUser.orElse(null);
     }

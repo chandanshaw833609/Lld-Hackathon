@@ -15,18 +15,21 @@ public class Main {
         BookCategoryManager bookCategoryManager = BookCategoryManager.getInstance();
         BookManager bookManager = BookManager.getInstance();
 
-        User admin = new Admin();
+        Admin admin = new Admin();
         admin.setName("admin");
+        admin.setUsername("admin");
         admin.setPassword("admin");
         userManager.saveUser(admin);
 
-        User seller = new Seller();
+        Seller seller = new Seller();
         seller.setName("seller");
         seller.setPassword("seller");
+        seller.setUsername("seller");
         userManager.saveUser(seller);
 
-        User buyer = new Buyer();
+        Buyer buyer = new Buyer();
         buyer.setName("buyer");
+        buyer.setUsername("buyer");
         buyer.setPassword("buyer");
         userManager.saveUser(buyer);
 
@@ -35,6 +38,7 @@ public class Main {
 
         Book book = new Book("Harry Potter", "JK Rollings", bookCategory, 100, seller.getId());
         bookManager.addBook(book);
+        seller.updateInventory(book);
 
         libraryManagementSystem.displayMenu();
         

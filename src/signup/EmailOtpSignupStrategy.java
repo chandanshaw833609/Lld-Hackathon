@@ -2,20 +2,17 @@ package signup;
 
 import UserModule.*;
 
-public class PasswordSignupStrategy implements SignupStrategy {
-
-    UserManager userManager;
-
-    public PasswordSignupStrategy()
+public class EmailOtpSignupStrategy implements SignupStrategy {
+    private final UserManager userManager;
+    public EmailOtpSignupStrategy()
     {
         this.userManager = UserManager.getInstance();
     }
-
     @Override
     public User processSignup(UserMetaData userMetaData) {
         User user = new Buyer();
         user.setName(userMetaData.getName());
-        user.setPassword(userMetaData.getPassword());
+        user.setEmail(userMetaData.getEmail());
         userManager.saveUser(user);
         return user;
     }

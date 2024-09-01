@@ -61,18 +61,20 @@ public class BuyerRequestProcessor {
             return;
         }
         //otherwise show all the books in the user's cart
-
-        System.out.println(buyer.getName() + " cart details ar listed below");
-        buyer.getCart().getBooks().forEach(book -> System.out.println(book.toString()));
+        System.out.println(buyer.getName() + ", your cart details ar listed below -> ");
+        buyer.getCart().getBooks().forEach(book -> System.out.println("-> "+book.toString()));
         System.out.println();
     }
 
     public void processViewPurchaseHistoryRequest(Buyer buyer) {
         List<PurchaseHistory> purchaseHistories  = buyer.getHistory();
         if (purchaseHistories.isEmpty()) {
-            System.out.println(buyer.getName() + "has no purchase history...\n");
+            System.out.println(buyer.getName() + ", your purchase history is empty...\n");
+            return;
         }
-        System.out.println(buyer.getName() + " purchase his is listed below\n");
+
+        //otherwise show his cart books
+        System.out.println(buyer.getName() + ", your purchase his is listed below ->");
         purchaseHistories.
                 forEach(purchaseHistory -> purchaseHistory
                         .getBooks()
@@ -83,12 +85,14 @@ public class BuyerRequestProcessor {
 
     public void processPaymentRequest(Buyer buyer) {
         double amount = buyer.getCart().getTotalCartAmount();
+
+        // make deep copy of the cart book list
         List<Book> cartBooks = new ArrayList<>(buyer.getCart().getBooks());
+
         if (cartBooks.isEmpty()) {
             System.out.println("Please add something to cart for buying!!!!");
             return;
         }
-
         // otherwise continue with payment
         paymentProcessor.setPaymentStrategy();
         paymentProcessor.processPayment(amount);
@@ -96,7 +100,6 @@ public class BuyerRequestProcessor {
         // update the buyers cart
         buyer.getCart().getBooks().clear();
         buyer.getCart().setTotalCartAmount(0);
-
 
         // update buyers purchase history
         updateBuyersPurchaseHistory(buyer,cartBooks);
@@ -115,22 +118,22 @@ public class BuyerRequestProcessor {
         }
     }
 
-    public void updateBuyersPurchaseHistory(Buyer buyer, List<Book> cartBooks) {
+    private void updateBuyersPurchaseHistory(Buyer buyer, List<Book> cartBooks) {
         PurchaseHistory purchaseHistory = new PurchaseHistory();
         purchaseHistory.setBooks(cartBooks);
         buyer.getHistory().add(purchaseHistory);
     }
 
-    public void updateSellersSale(List<Book> cartBooks) {
+    private void updateSellersSale(List<Book> cartBooks) {
         for (Book book : cartBooks) {
             // first get each seller from book object
             // and then update his sales list
             // or create new sale and add in the sales list
             Seller seller = (Seller) userManager.getUserById(book.getSellerId());
-            List<Sale> saleList = seller.getSales();
+            List<Sale> saleList = seller.getSalesHistory();
             if (saleList.isEmpty()) {
                 Sale newSale = new Sale(book);
-                seller.setSales(newSale);
+                seller.updateSalesHistory(newSale);
                 return;
             }
             for (Sale sale : saleList) {
@@ -140,7 +143,7 @@ public class BuyerRequestProcessor {
                     sale.setTotalPurchase(sale.getTotalPurchase()+1);
                 } else {
                     Sale newSale = new Sale(book);
-                    seller.setSales(newSale);
+                    seller.updateSalesHistory(newSale);
                 }
             }
         }

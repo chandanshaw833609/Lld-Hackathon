@@ -8,6 +8,12 @@ public class UserMetaData {
     String password;
     String email;
 
+    String username;
+
+    public String getUsername() {
+        return username;
+    }
+
     public UserMetaData(String name, Role role) {
         this.name = name;
         this.role = role;
@@ -47,5 +53,9 @@ public class UserMetaData {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

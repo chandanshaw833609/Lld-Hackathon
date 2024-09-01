@@ -2,11 +2,11 @@ package login;
 
 import UserModule.*;
 
-public class EmailLoginStrategy implements LoginStrategy {
+public class EmailOtpLoginStrategy implements LoginStrategy {
 
-    UserManager userManager;
+    private final UserManager userManager;
 
-    public EmailLoginStrategy()
+    public EmailOtpLoginStrategy()
     {
         this.userManager = UserManager.getInstance();
     }

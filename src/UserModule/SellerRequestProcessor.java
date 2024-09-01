@@ -12,28 +12,29 @@ public class SellerRequestProcessor {
     private final BookManager bookManager = BookManager.getInstance();
     private final BookCategoryManager bookCategoryManager = BookCategoryManager.getInstance();
 
-    public void displaySellerMenu(Seller seller) {
-        System.out.println("For adding a book enter -> 1");
-        System.out.println("For viewing sales enter -> 3");
-        System.out.println("For logout enter logout -> logout");
 
-        Scanner scanner = new Scanner(System.in);
-        String option = scanner.nextLine();
-
-        switch (option) {
-            case "1" -> processAddBookRequest(seller);
-            case "2" -> processViewSalesRequest(seller);
-            case "logout" -> {
-                seller = null;
-                System.out.println("Logged out successfully...\n");
-            }
-            default -> System.out.println("Choose a valid option...");
+    public void processViewSalesHistoryRequest(Seller seller) {
+        List<Sale> saleList = seller.getSalesHistory();
+        if (saleList.isEmpty()) {
+            System.out.println("You have not any sale history...\n");
+            return;
         }
+        System.out.println(seller.getName() + " sales are listed below : ");
+        seller.getSalesHistory().forEach(sale -> System.out.println("-> "+sale.toString()));
+        System.out.println();
     }
 
-    public void processViewSalesRequest(Seller seller) {
-        System.out.println(seller.getName() + " sales are listed below : ");
-        seller.getSales().forEach(sale -> System.out.println(sale.toString()));
+    public void processViewInventoryRequest(Seller seller) {
+        List<Book> inventory = seller.getInventory();
+
+        if (inventory.isEmpty()) {
+            System.out.println(seller.getName() + ", your inventory is empty!!!\n");
+            return;
+        }
+
+        // otherwise show his inventory
+        System.out.println(seller.getName() + ", your inventory -> ");
+        inventory.forEach(book -> System.out.println("-> " + book.toString()));
         System.out.println();
     }
 
@@ -52,7 +53,7 @@ public class SellerRequestProcessor {
         scanner.nextLine();
 
         List<BookCategory> bookCategories = bookCategoryManager.getAllCategory();
-        bookCategories.forEach(bookCategory -> System.out.println(bookCategory.getName()));
+        bookCategories.forEach(bookCategory -> System.out.println("-> "+bookCategory.getName()));
         System.out.println();
         System.out.println("Choose one of the category -> ");
         String category = scanner.nextLine();
@@ -67,6 +68,9 @@ public class SellerRequestProcessor {
 
         Book book = new Book(bookName, author, bookCategoryManager.getCategoryByName(category),price, seller.getId());
         bookManager.addBook(book);
+
+        //update seller inventory
+        seller.updateInventory(book);
         System.out.println("Book added successfully\n");
     }
 

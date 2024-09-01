@@ -35,11 +35,13 @@ public class LibraryManagementSystem {
             while (loggedInUser != null && loggedInUser.getRole() == Role.SELLER) {
                 System.out.println("For adding a book enter -> 1");
                 System.out.println("For viewing sales enter -> 2");
+                System.out.println("For viewing inventory enter -> 3");
                 System.out.println("For logout enter logout -> logout");
                 String option = scanner.nextLine();
                 switch (option) {
                     case "1" -> sellerRequestProcessor.processAddBookRequest((Seller) loggedInUser);
-                    case "2" -> sellerRequestProcessor.processViewSalesRequest((Seller) loggedInUser);
+                    case "2" -> sellerRequestProcessor.processViewSalesHistoryRequest((Seller) loggedInUser);
+                    case "3" -> sellerRequestProcessor.processViewInventoryRequest((Seller) loggedInUser);
                     case "logout" -> {
                         loggedInUser = null;
                         System.out.println("Logged out successfully...\n");
