@@ -15,7 +15,7 @@ public class Main {
         BookCategoryManager bookCategoryManager = BookCategoryManager.getInstance();
         BookManager bookManager = BookManager.getInstance();
 
-        Admin admin = new Admin();
+        User admin = new User(Role.ADMIN);
         admin.setName("admin");
         admin.setUsername("admin");
         admin.setPassword("admin");
@@ -33,12 +33,19 @@ public class Main {
         buyer.setPassword("buyer");
         userManager.saveUser(buyer);
 
-        BookCategory bookCategory = new BookCategory("Fiction");
-        bookCategoryManager.addBookCategory(bookCategory);
+        BookCategory bookCategory1 = new BookCategory("Fiction");
+        BookCategory bookCategory2 = new BookCategory("Drama");
 
-        Book book = new Book("Harry Potter", "JK Rollings", bookCategory, 100, seller.getId());
-        bookManager.addBook(book);
-        seller.updateInventory(book);
+        bookCategoryManager.addBookCategory(bookCategory1);
+        bookCategoryManager.addBookCategory(bookCategory2);
+
+        Book book1 = new Book("Harry Potter", "JK Rollings", bookCategory1, 1000.00, seller.getId());
+        bookManager.addBook(book1);
+        seller.updateInventory(book1.getBookId());
+
+        Book book2 = new Book("Macbeth", "William Shakespeare", bookCategory2, 1500.00, seller.getId());
+        bookManager.addBook(book2);
+        seller.updateInventory(book2.getBookId());
 
         libraryManagementSystem.displayMenu();
         

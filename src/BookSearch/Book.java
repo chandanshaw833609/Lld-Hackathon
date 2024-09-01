@@ -63,7 +63,7 @@ public class Book {
         return "Book {" +
                 "author='" + author + '\'' +
                 ", name='" + name + '\'' +
-                ", bookCategory=" + bookCategory.getName() +
+                ", bookCategory='" +  bookCategory.getName() + '\''+
                 ", price=" + price +
                 '}';
     }

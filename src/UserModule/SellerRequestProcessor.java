@@ -6,6 +6,7 @@ import BookSearch.BookCategoryManager;
 import BookSearch.BookManager;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class SellerRequestProcessor {
@@ -14,18 +15,27 @@ public class SellerRequestProcessor {
 
 
     public void processViewSalesHistoryRequest(Seller seller) {
-        List<Sale> saleList = seller.getSalesHistory();
-        if (saleList.isEmpty()) {
+        Map<String, Integer> bookSaleRecord = seller.getBookSaleMap();
+        if (bookSaleRecord.isEmpty()) {
             System.out.println("You have not any sale history...\n");
             return;
         }
+
+        double totalProfit = 0;
         System.out.println(seller.getName() + " sales are listed below : ");
-        seller.getSalesHistory().forEach(sale -> System.out.println("-> "+sale.toString()));
+        for (String bookId : bookSaleRecord.keySet()) {
+            Book book = bookManager.getBook(bookId);
+            int salesCount = bookSaleRecord.get(bookId);
+            double profit = book.getPrice() * salesCount;
+            totalProfit += profit;
+            System.out.println("Book Name -> " + book.getName() + ", Sales Count: " + salesCount + ", Profit: Rs."+profit);
+        }
+        System.out.println("Your total profit Rs." + totalProfit);
         System.out.println();
     }
 
     public void processViewInventoryRequest(Seller seller) {
-        List<Book> inventory = seller.getInventory();
+        List<String> inventory = seller.getInventory();
 
         if (inventory.isEmpty()) {
             System.out.println(seller.getName() + ", your inventory is empty!!!\n");
@@ -34,7 +44,11 @@ public class SellerRequestProcessor {
 
         // otherwise show his inventory
         System.out.println(seller.getName() + ", your inventory -> ");
-        inventory.forEach(book -> System.out.println("-> " + book.toString()));
+        for (String bookId : inventory) {
+            Book book = bookManager.getBook(bookId);
+            System.out.println(book.toString());
+        }
+
         System.out.println();
     }
 
@@ -70,7 +84,7 @@ public class SellerRequestProcessor {
         bookManager.addBook(book);
 
         //update seller inventory
-        seller.updateInventory(book);
+        seller.updateInventory(book.getBookId());
         System.out.println("Book added successfully\n");
     }
 

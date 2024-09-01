@@ -6,8 +6,7 @@ import UserModule.UserMetaData;
 import java.util.Scanner;
 
 public class LoginProcessor {
-    LoginStrategy loginStrategy;
-
+    private LoginStrategy loginStrategy;
 
     public LoginProcessor() {
         this.loginStrategy = null;

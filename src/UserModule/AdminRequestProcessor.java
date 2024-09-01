@@ -10,24 +10,8 @@ import java.util.Scanner;
 public class AdminRequestProcessor {
     private final UserManager userManager = UserManager.getInstance();
     private final Scanner scanner = new Scanner(System.in);
-
     private final BookCategoryManager bookCategoryManager = BookCategoryManager.getInstance();
 
-    public void displayAdminMenu(User admin) {
-        System.out.println("For adding a seller enter -> 1");
-        System.out.println("For removing a seller enter -> 2");
-        System.out.println("For logout enter logout -> logout");
-        String option = scanner.nextLine();
-        switch (option) {
-            case "1" -> addSeller();
-            case "2" -> removeSeller();
-            case "logout" -> {
-                admin = null;
-                System.out.println("Logged out successfully...\n");
-            }
-            default -> System.out.println("choose a valid option");
-        }
-    }
 
     public void addSeller() {
         System.out.println("Enter name -> ");

@@ -105,7 +105,7 @@ public class BuyerRequestProcessor {
         updateBuyersPurchaseHistory(buyer,cartBooks);
 
         // add or update sale to each of the seller
-        updateSellersSale(cartBooks);
+        updateSaleRecord(cartBooks);
 
 
     }
@@ -124,28 +124,12 @@ public class BuyerRequestProcessor {
         buyer.getHistory().add(purchaseHistory);
     }
 
-    private void updateSellersSale(List<Book> cartBooks) {
+    private void updateSaleRecord(List<Book> cartBooks) {
         for (Book book : cartBooks) {
             // first get each seller from book object
-            // and then update his sales list
-            // or create new sale and add in the sales list
+            // and then update his sales
             Seller seller = (Seller) userManager.getUserById(book.getSellerId());
-            List<Sale> saleList = seller.getSalesHistory();
-            if (saleList.isEmpty()) {
-                Sale newSale = new Sale(book);
-                seller.updateSalesHistory(newSale);
-                return;
-            }
-            for (Sale sale : saleList) {
-                if (sale.getBook() == book) {
-                    double totalProfit = sale.getTotalProfit() + book.getPrice();
-                    sale.setTotalProfit(totalProfit);
-                    sale.setTotalPurchase(sale.getTotalPurchase()+1);
-                } else {
-                    Sale newSale = new Sale(book);
-                    seller.updateSalesHistory(newSale);
-                }
-            }
+            seller.recordSale(book.getBookId());
         }
     }
 }
