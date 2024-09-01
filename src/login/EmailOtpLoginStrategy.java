@@ -1,6 +1,6 @@
 package login;
 
-import UserModule.*;
+import user.*;
 
 public class EmailOtpLoginStrategy implements LoginStrategy {
 

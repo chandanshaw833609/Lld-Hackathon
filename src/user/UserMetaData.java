@@ -1,6 +1,4 @@
-package UserModule;
-
-import java.util.UUID;
+package user;
 
 public class UserMetaData {
     String name;

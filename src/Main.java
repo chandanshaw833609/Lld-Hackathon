@@ -1,11 +1,8 @@
-import BookSearch.Book;
-import BookSearch.BookCategory;
-import BookSearch.BookCategoryManager;
-import BookSearch.BookManager;
-import UserModule.*;
-
-import java.util.List;
-import java.util.Scanner;
+import book.Book;
+import book.BookCategory;
+import book_search.BookCategoryManager;
+import book.BookManager;
+import user.*;
 
 public class Main {
 

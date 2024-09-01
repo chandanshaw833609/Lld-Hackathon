@@ -1,7 +1,12 @@
 package login;
 
+<<<<<<< HEAD
 import UserModule.User;
 import UserModule.UserMetaData;
+=======
+import user.User;
+import user.UserMetaData;
+>>>>>>> main
 
 import java.util.Scanner;
 

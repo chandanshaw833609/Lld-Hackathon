@@ -1,6 +1,6 @@
 package signup;
 
-import UserModule.*;
+import user.*;
 
 public class EmailOtpSignupStrategy implements SignupStrategy {
     private final UserManager userManager;

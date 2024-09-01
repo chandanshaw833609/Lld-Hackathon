@@ -1,4 +1,4 @@
-package UserModule;
+package user;
 
 public enum Role {
     BUYER, SELLER, ADMIN

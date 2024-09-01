@@ -1,4 +1,4 @@
-import UserModule.*;
+import user.*;
 import login.LoginProcessor;
 import signup.SignUpProcessor;
 

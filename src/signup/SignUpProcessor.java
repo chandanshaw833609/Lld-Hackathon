@@ -1,8 +1,14 @@
 package signup;
 
+<<<<<<< HEAD
 import UserModule.Buyer;
 import UserModule.User;
 import UserModule.UserManager;
+=======
+import user.Buyer;
+import user.User;
+import user.UserManager;
+>>>>>>> main
 
 import java.util.Scanner;
 

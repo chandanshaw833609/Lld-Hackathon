@@ -1,8 +1,8 @@
-package UserModule;
+package user;
 
-import BookSearch.Book;
-import BookSearch.BookManager;
-import BookSearch.BookSearchProcessor;
+import book.Book;
+import book.BookManager;
+import book_search.BookSearchProcessor;
 import PaymentModule.PaymentProcessor;
 
 import java.util.ArrayList;

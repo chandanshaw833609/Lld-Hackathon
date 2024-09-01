@@ -1,4 +1,4 @@
-package BookSearch;
+package book;
 
 import java.util.*;
 

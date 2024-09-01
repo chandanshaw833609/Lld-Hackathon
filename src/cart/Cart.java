@@ -1,6 +1,6 @@
 package cart;
 
-import BookSearch.Book;
+import book.Book;
 
 import java.util.ArrayList;
 import java.util.List;

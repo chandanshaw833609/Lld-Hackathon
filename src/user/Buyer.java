@@ -1,4 +1,4 @@
-package UserModule;
+package user;
 
 import cart.Cart;
 
