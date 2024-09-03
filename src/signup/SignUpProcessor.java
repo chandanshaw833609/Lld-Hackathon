@@ -1,8 +1,8 @@
 package signup;
 
-import UserModule.Buyer;
-import UserModule.User;
-import UserModule.UserManager;
+import buyer.Buyer;
+import user.User;
+import user.UserManager;
 
 import java.util.Scanner;
 
@@ -31,7 +31,6 @@ public class SignUpProcessor {
             if (registeredUser != null) {
                 System.out.println("Try signing up with different email...");
                 System.out.println("This email is already registered!!!\n");
-                processSignUp();
                 return;
             }
 

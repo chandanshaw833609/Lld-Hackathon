@@ -1,6 +1,7 @@
 package signup;
 
-import UserModule.*;
+import buyer.Buyer;
+import user.*;
 
 public class UsernamePasswordSignupStrategy implements SignupStrategy {
 

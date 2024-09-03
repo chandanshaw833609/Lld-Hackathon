@@ -1,11 +1,10 @@
-import BookSearch.Book;
-import BookSearch.BookCategory;
-import BookSearch.BookCategoryManager;
-import BookSearch.BookManager;
-import UserModule.*;
-
-import java.util.List;
-import java.util.Scanner;
+import book.Book;
+import book_category.BookCategory;
+import book_category.BookCategoryManager;
+import book.BookManager;
+import buyer.Buyer;
+import seller.Seller;
+import user.*;
 
 public class Main {
 
@@ -42,10 +41,12 @@ public class Main {
         Book book1 = new Book("Harry Potter", "JK Rollings", bookCategory1, 1000.00, seller.getId());
         bookManager.addBook(book1);
         seller.updateInventory(book1.getBookId());
+        bookCategory1.addBook(book1.getBookId());
 
         Book book2 = new Book("Macbeth", "William Shakespeare", bookCategory2, 1500.00, seller.getId());
         bookManager.addBook(book2);
         seller.updateInventory(book2.getBookId());
+        bookCategory2.addBook(book2.getBookId());
 
         libraryManagementSystem.displayMenu();
         

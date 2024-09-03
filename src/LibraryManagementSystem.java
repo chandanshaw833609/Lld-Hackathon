@@ -1,4 +1,9 @@
-import UserModule.*;
+import buyer.Buyer;
+import request_processor.AdminRequestProcessor;
+import request_processor.BuyerRequestProcessor;
+import request_processor.SellerRequestProcessor;
+import seller.Seller;
+import user.*;
 import login.LoginProcessor;
 import signup.SignUpProcessor;
 
@@ -22,9 +27,9 @@ public class LibraryManagementSystem {
                 System.out.println("For logout enter -> logout");
                 String option = scanner.nextLine();
                 switch (option) {
-                    case "1" -> adminRequestProcessor.addSeller();
-                    case "2" -> adminRequestProcessor.removeSeller();
-                    case "3" -> adminRequestProcessor.addBookCategory();
+                    case "1" -> adminRequestProcessor.processAddSellerRequest();
+                    case "2" -> adminRequestProcessor.processRemoveSellerRequest();
+                    case "3" -> adminRequestProcessor.processAddBookCategoryRequest();
                     case "logout" -> {
                         loggedInUser = null;
                         System.out.println("Logged out successfully...\n");
