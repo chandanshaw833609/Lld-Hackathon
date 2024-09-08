@@ -2,7 +2,6 @@ package login;
 
 import user.User;
 import user.UserManager;
-import user.UserMetaData;
 
 public class UsernamePasswordLoginStrategy implements LoginStrategy {
 
@@ -14,10 +13,12 @@ public class UsernamePasswordLoginStrategy implements LoginStrategy {
     }
 
     @Override
-    public User processLogin(UserMetaData userMetaData) {
-        String username = userMetaData.getUsername();
-        String password = userMetaData.getPassword();
+    public User performLogin(LoginDetails loginDetails) {
+        UsernamePasswordLoginDetails details = (UsernamePasswordLoginDetails) loginDetails;
+        String username = details.username();
+        String password = details.password();
         User user = userManager.getUserByUsername(username);
+
         if (user == null) {
             return null;
         }

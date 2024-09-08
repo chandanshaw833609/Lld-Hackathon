@@ -26,7 +26,7 @@ public class BookManager {
     }
 
     public Book getBookByName(String bookName) {
-       Optional<Book> optionalBook = booksMap.values().stream().filter(book -> book.getName().equalsIgnoreCase(bookName)).findFirst();
+       Optional<Book> optionalBook = booksMap.values().stream().filter(book -> book.getTitle().equalsIgnoreCase(bookName)).findFirst();
         return optionalBook.orElse(null);
     }
 
@@ -36,5 +36,30 @@ public class BookManager {
 
     public List<Book> getAllBook() {
         return new ArrayList<>(booksMap.values());
+    }
+
+    public List<Book> getBookBySeller(String sellerId) {
+        return booksMap
+                .values()
+                .stream()
+                .filter(book -> book.getSellerId().equals(sellerId))
+                .toList();
+    }
+
+    public List<Book> getBookByCategory(BookCategory bookCategory) {
+        return booksMap.
+                values()
+                .stream()
+                .filter(book -> book.getBookCategory().ordinal() == bookCategory.ordinal())
+                .toList();
+    }
+
+    public Book getBookByNameAndSeller(String bookName, String sellerId) {
+        return booksMap.
+                values()
+                .stream()
+                .filter(book -> book.getTitle().equals(bookName) && book.getSellerId().equals(sellerId))
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -12,7 +12,9 @@ public class EmailOtpLoginStrategy implements LoginStrategy {
     }
 
     @Override
-    public User processLogin(UserMetaData userMetaData) {
-        return userManager.getUserByEmail(userMetaData.getEmail());
+    public User performLogin(LoginDetails loginDetails) {
+        EmailOtpLoginDetails details = (EmailOtpLoginDetails) loginDetails;
+        String email = details.email();
+        return userManager.getUserByEmail(email);
     }
 }

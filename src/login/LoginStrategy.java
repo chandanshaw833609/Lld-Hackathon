@@ -1,8 +1,8 @@
 package login;
 
 import user.User;
-import user.UserMetaData;
 
+@FunctionalInterface
 public interface LoginStrategy {
-    public User processLogin(UserMetaData userMetaData);
+    public User performLogin(LoginDetails details);
 }

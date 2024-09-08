@@ -1,7 +1,6 @@
 package login;
 
 import user.User;
-import user.UserMetaData;
 
 import java.util.Scanner;
 
@@ -30,22 +29,28 @@ public class LoginProcessor {
 
     public User processLogin() {
         Scanner scanner = new Scanner(System.in);
-        UserMetaData userMetaData = new UserMetaData();
+        LoginDetails loginDetails;
+
+        // in ideal case we get loginDetails from frontend
+        // so nothing to worry about this if else conditions
+        // we can just call
+        // loginStrategy.processLogin(loginDetails);
 
         if (loginStrategy instanceof EmailOtpLoginStrategy) {
             System.out.println("Enter your email ->");
             String email = scanner.nextLine();
-            userMetaData.setEmail(email);
-        } else {
+            loginDetails = new EmailOtpLoginDetails(email);
+        } else if (loginStrategy instanceof UsernamePasswordLoginStrategy){
             System.out.println("Enter your username -> ");
             String username = scanner.nextLine();
-            userMetaData.setUsername(username);
             System.out.println("Enter your password -> ");
             String password = scanner.nextLine();
-            userMetaData.setPassword(password);
+            loginDetails = new UsernamePasswordLoginDetails(username, password);
+        } else {
+            return null;
         }
 
-        User isAuthenticatedUser = loginStrategy.processLogin(userMetaData);
+        User isAuthenticatedUser = loginStrategy.performLogin(loginDetails);
 
         if (isAuthenticatedUser != null) {
             System.out.println(isAuthenticatedUser.getName() + " has logged in successfully...\n");

@@ -1,31 +1,24 @@
 package book;
 
-import book_category.BookCategory;
-
 import java.util.UUID;
 
 public class Book {
     private final String bookId;
     private final String author;
-    private final String name;
+    private final String title;
     private final BookCategory bookCategory;
-
     private double price;
-
-    private String sellerId;
+    private final String sellerId;
 
     public String getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(String sellerId) {
-        this.sellerId = sellerId;
-    }
 
-    public Book (String name, String author, BookCategory bookCategory, double price, String sellerId) {
+    public Book (String title, String author, BookCategory bookCategory, double price, String sellerId) {
         this.bookId = UUID.randomUUID().toString();
         this.author = author;
-        this.name = name;
+        this.title = title;
         this.bookCategory = bookCategory;
         this.price=price;
         this.sellerId = sellerId;
@@ -39,8 +32,8 @@ public class Book {
         return author;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public BookCategory getBookCategory() {
@@ -60,7 +53,7 @@ public class Book {
     public String toString() {
         return "Book {" +
                 "author='" + author + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + title + '\'' +
                 ", bookCategory='" +  bookCategory.getName() + '\''+
                 ", price=" + price +
                 '}';

@@ -1,7 +1,4 @@
 package request_processor;
-
-import book_category.BookCategory;
-import book_category.BookCategoryManager;
 import user.Role;
 import seller.Seller;
 import user.User;
@@ -14,7 +11,6 @@ import java.util.Scanner;
 public class AdminRequestProcessor {
     private final UserManager userManager = UserManager.getInstance();
     private final Scanner scanner = new Scanner(System.in);
-    private final BookCategoryManager bookCategoryManager = BookCategoryManager.getInstance();
 
 
     public void processAddSellerRequest() {
@@ -70,17 +66,4 @@ public class AdminRequestProcessor {
         }
     }
 
-    public void processAddBookCategoryRequest() {
-        System.out.println("Enter category name -> ");
-        String categoryName = scanner.nextLine();
-        BookCategory category = bookCategoryManager.getCategoryByName(categoryName);
-        if (category != null) {
-            System.out.println("Enter a different category name...");
-            System.out.println("This book category already exist!!!\n");
-            return;
-        }
-        BookCategory bookCategory = new BookCategory(categoryName);
-        bookCategoryManager.addBookCategory(bookCategory);
-        System.out.println("Category added successfully...\n");
-    }
 }

@@ -1,6 +1,5 @@
 import book.Book;
-import book_category.BookCategory;
-import book_category.BookCategoryManager;
+import book.BookCategory;
 import book.BookManager;
 import buyer.Buyer;
 import seller.Seller;
@@ -11,7 +10,6 @@ public class Main {
     public static void main(String[] args) {
         LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem();
         UserManager userManager = UserManager.getInstance();
-        BookCategoryManager bookCategoryManager = BookCategoryManager.getInstance();
         BookManager bookManager = BookManager.getInstance();
 
         User admin = new User(Role.ADMIN);
@@ -32,21 +30,13 @@ public class Main {
         buyer.setPassword("buyer");
         userManager.saveUser(buyer);
 
-        BookCategory bookCategory1 = new BookCategory("Fiction");
-        BookCategory bookCategory2 = new BookCategory("Drama");
 
-        bookCategoryManager.addBookCategory(bookCategory1);
-        bookCategoryManager.addBookCategory(bookCategory2);
-
-        Book book1 = new Book("Harry Potter", "JK Rollings", bookCategory1, 1000.00, seller.getId());
+        Book book1 = new Book("Harry Potter", "JK Rollings", BookCategory.SCIENCE_FICTION, 1000.00, seller.getId());
         bookManager.addBook(book1);
-        seller.updateInventory(book1.getBookId());
-        bookCategory1.addBook(book1.getBookId());
 
-        Book book2 = new Book("Macbeth", "William Shakespeare", bookCategory2, 1500.00, seller.getId());
+
+        Book book2 = new Book("Macbeth", "William Shakespeare", BookCategory.LITERATURE_FICTION, 1500.00, seller.getId());
         bookManager.addBook(book2);
-        seller.updateInventory(book2.getBookId());
-        bookCategory2.addBook(book2.getBookId());
 
         libraryManagementSystem.displayMenu();
         

@@ -1,42 +1,45 @@
 package request_processor;
 
 import book.Book;
-import book_category.BookCategory;
-import book_category.BookCategoryManager;
+import book.BookCategory;
 import book.BookManager;
-import seller.Seller;
+import seller.SalesRecord;
+import seller.SalesRecordManager;
+import user.User;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class SellerRequestProcessor {
     private final BookManager bookManager = BookManager.getInstance();
-    private final BookCategoryManager bookCategoryManager = BookCategoryManager.getInstance();
+    private final SalesRecordManager salesRecordManager = SalesRecordManager.getInstance();
 
-
-    public void processViewSalesHistoryRequest(Seller seller) {
-        Map<String, Integer> bookSaleRecord = seller.getBookSaleMap();
-        if (bookSaleRecord.isEmpty()) {
+    public void processViewSalesRecordRequest(User seller) {
+        List<SalesRecord> salesRecordList = salesRecordManager.getSalesRecordBySeller(seller.getId());
+        if (salesRecordList.isEmpty()) {
             System.out.println("You have not any sale history...\n");
             return;
         }
 
         double totalProfit = 0;
         System.out.println(seller.getName() + ", your sales are listed below -> ");
-        for (String bookId : bookSaleRecord.keySet()) {
-            Book book = bookManager.getBook(bookId);
-            int salesCount = bookSaleRecord.get(bookId);
-            double profit = book.getPrice() * salesCount;
+
+        for (SalesRecord record : salesRecordList) {
+            Book book = record.getBook();
+            int timesSold = record.getTimesSold();
+            double profit = book.getPrice() * timesSold;
             totalProfit += profit;
-            System.out.println("Book Name -> " + book.getName() + ", Sales Count: " + salesCount + ", Profit: Rs."+profit);
+            System.out.println("Book -> " + book.getTitle() + ", Sales Count: " + timesSold + ", Profit: Rs" + profit);
         }
-        System.out.println("Your total profit Rs." + totalProfit);
+        System.out.println("Your total profit: " +totalProfit);
         System.out.println();
     }
 
-    public void processViewInventoryRequest(Seller seller) {
-        List<String> inventory = seller.getInventory();
+
+
+    public void processViewInventoryRequest(User seller) {
+        List<Book> inventory = bookManager.getBookBySeller(seller.getId());
 
         if (inventory.isEmpty()) {
             System.out.println(seller.getName() + ", your inventory is empty!!!\n");
@@ -45,21 +48,18 @@ public class SellerRequestProcessor {
 
         // otherwise show his inventory
         System.out.println(seller.getName() + ", your inventory -> ");
-        for (String bookId : inventory) {
-            Book book = bookManager.getBook(bookId);
-            System.out.println(book.toString());
-        }
-
+        inventory.forEach(book -> System.out.println(book.toString()));
         System.out.println();
     }
 
-    public void processAddBookRequest(Seller seller) {
+    public void processAddBookRequest(User seller) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter book name : ");
         String bookName = scanner.nextLine();
 
-        Book registeredBook = bookManager.getBookByName(bookName);
+        Book registeredBook = bookManager.getBookByNameAndSeller(bookName, seller.getId());
+
         if (registeredBook != null) {
             System.out.println("Enter different book name...");
             System.out.println("Book with book name " + bookName + " exist already!!!\n");
@@ -71,16 +71,22 @@ public class SellerRequestProcessor {
 
         System.out.print("Enter price for the book : ");
         double price = scanner.nextDouble();
-
         scanner.nextLine();
 
-        List<BookCategory> bookCategories = bookCategoryManager.getAllCategory();
-        bookCategories.forEach(bookCategory -> System.out.println("-> "+bookCategory.getName()));
-        System.out.println();
-        System.out.println("Choose one of the category -> ");
-        String category = scanner.nextLine();
+        List<BookCategory> lies = List.of(BookCategory.values());
+        for (BookCategory categoryEnum : BookCategory.values()) {
+            System.out.println(categoryEnum.ordinal() + " -> " + categoryEnum.getName());
+        }
 
-        BookCategory bookCategory = bookCategoryManager.getCategoryByName(category);
+        System.out.println("Choose category by entering number -> ");
+        int category = scanner.nextInt();
+        scanner.nextLine();
+
+        BookCategory bookCategory = Arrays
+                .stream(BookCategory.values())
+                .filter(bookCategoryEnum1 -> bookCategoryEnum1.ordinal() == category)
+                .findFirst()
+                .orElse(null);
 
         if (bookCategory == null) {
             System.out.println("choose a valid category...");
@@ -88,12 +94,9 @@ public class SellerRequestProcessor {
             return;
         }
 
-        Book book = new Book(bookName, author, bookCategoryManager.getCategoryByName(category),price, seller.getId());
+        Book book = new Book(bookName, author, bookCategory, price, seller.getId());
         bookManager.addBook(book);
-        bookCategory.addBook(book.getBookId());
 
-        //update seller inventory
-        seller.updateInventory(book.getBookId());
         System.out.println("Book added successfully\n");
     }
 

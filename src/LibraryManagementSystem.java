@@ -23,13 +23,11 @@ public class LibraryManagementSystem {
             while (loggedInUser != null && loggedInUser.getRole() == Role.ADMIN) {
                 System.out.println("For adding a seller enter -> 1");
                 System.out.println("For removing a seller enter -> 2");
-                System.out.println("For adding book category enter -> 3");
                 System.out.println("For logout enter -> logout");
                 String option = scanner.nextLine();
                 switch (option) {
                     case "1" -> adminRequestProcessor.processAddSellerRequest();
                     case "2" -> adminRequestProcessor.processRemoveSellerRequest();
-                    case "3" -> adminRequestProcessor.processAddBookCategoryRequest();
                     case "logout" -> {
                         loggedInUser = null;
                         System.out.println("Logged out successfully...\n");
@@ -44,9 +42,9 @@ public class LibraryManagementSystem {
                 System.out.println("For logout enter logout -> logout");
                 String option = scanner.nextLine();
                 switch (option) {
-                    case "1" -> sellerRequestProcessor.processAddBookRequest((Seller) loggedInUser);
-                    case "2" -> sellerRequestProcessor.processViewSalesHistoryRequest((Seller) loggedInUser);
-                    case "3" -> sellerRequestProcessor.processViewInventoryRequest((Seller) loggedInUser);
+                    case "1" -> sellerRequestProcessor.processAddBookRequest(loggedInUser);
+                    case "2" -> sellerRequestProcessor.processViewSalesRecordRequest(loggedInUser);
+                    case "3" -> sellerRequestProcessor.processViewInventoryRequest(loggedInUser);
                     case "logout" -> {
                         loggedInUser = null;
                         System.out.println("Logged out successfully...\n");
@@ -63,11 +61,11 @@ public class LibraryManagementSystem {
                 System.out.println("For logout enter -> logout");
                 String option = scanner.nextLine();
                 switch (option) {
-                    case "0" -> buyerRequestProcessor.processBookBrowseRequest((Buyer) loggedInUser);
-                    case "1" -> buyerRequestProcessor.processBookSearchRequest((Buyer) loggedInUser);
-                    case "2" -> buyerRequestProcessor.processViewCartRequest((Buyer) loggedInUser);
-                    case "3" -> buyerRequestProcessor.processPaymentRequest((Buyer) loggedInUser);
-                    case "4" -> buyerRequestProcessor.processViewPurchaseHistoryRequest((Buyer) loggedInUser);
+                    case "0" -> buyerRequestProcessor.processBookBrowseRequest(loggedInUser);
+                    case "1" -> buyerRequestProcessor.processBookSearchRequest(loggedInUser);
+                    case "2" -> buyerRequestProcessor.processViewCartRequest(loggedInUser);
+                    case "3" -> buyerRequestProcessor.processPaymentRequest(loggedInUser);
+                    case "4" -> buyerRequestProcessor.processViewOrderHistoryRequest(loggedInUser);
                     case "logout" -> {
                         loggedInUser = null;
                         System.out.println("Logged out successfully...\n");

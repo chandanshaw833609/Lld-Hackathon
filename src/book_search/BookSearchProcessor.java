@@ -26,7 +26,6 @@ public class BookSearchProcessor {
         switch (input) {
             case 1 -> bookSearchingStrategy = new BookSearchByName();
             case 2 -> bookSearchingStrategy = new BookSearchByAuthor();
-            case 3 -> bookSearchingStrategy = new BookSearchByCategory();
             default -> {
                 System.out.println("Enter a valid option...\n");
                 setBookSearchingStrategy();

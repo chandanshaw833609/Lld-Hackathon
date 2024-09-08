@@ -5,7 +5,6 @@ public class UserMetaData {
     Role role;
     String password;
     String email;
-
     String username;
 
     public String getUsername() {
@@ -35,14 +34,6 @@ public class UserMetaData {
 
     public String getName() {
         return name;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public String getPassword() {

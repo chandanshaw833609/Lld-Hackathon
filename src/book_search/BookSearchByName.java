@@ -14,7 +14,7 @@ public class BookSearchByName implements BookSearchingStrategy{
         return allBooks
                 .stream()
                 .filter(book -> book
-                        .getName()
+                        .getTitle()
                         .toLowerCase()
                         .contains(searchOptions.toLowerCase()))
                 .toList();
